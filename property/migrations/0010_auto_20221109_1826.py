@@ -7,7 +7,7 @@ from phonenumbers.phonenumberutil import NumberParseException
 
 def format_phonenumber(apps, schema_editor):
     Flat = apps.get_model('property', 'Flat')
-    for flat in Flat.objects.filter(owner_pure_phone=None):
+    for flat in Flat.objects.filter(owner_pure_phone=None).iterator():
         try:
             parsed_phonenumber = phonenumbers.parse(flat.owners_phonenumber, 'RU')
         except NumberParseException:
